@@ -42,23 +42,6 @@
   --radius-control: var(--radius-control);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #e1e8fa;
-    --foreground: #ededed;
-
-    --color-surface: #18181b;         /* zinc-900 */
-    --color-surface-muted: #27272a;   /* zinc-800 */
-    --color-border: #3f3f46;          /* zinc-700 */
-    --color-muted: #a1a1aa;           /* zinc-400 */
-
-    --color-accent: #6366f1;          /* indigo-500 */
-    --color-accent-soft: #1e1b4b;     /* indigo-950 */
-
-    --color-danger: #ef4444;          /* red-500 */
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
