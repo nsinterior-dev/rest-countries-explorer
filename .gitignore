@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+.remember/
+country-search-plan.md
 
 # debug
 npm-debug.log*
