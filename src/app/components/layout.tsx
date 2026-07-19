@@ -28,7 +28,7 @@ export default function ComponentsLayout({
       style={{ colorScheme: 'light' }}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col m-auto p-8 gap-6">
+      <body className="min-h-full max-w-l flex flex-col m-auto p-8 gap-6">
         <h1 className="text-2xl font-bold">Components</h1>
         <div className="gap-4">
         {children}
