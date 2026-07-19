@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from 'react';
 import { Banner, Container, Button, Typography, Input, SearchInput, MenuList, MenuItem, MenuEmpty, LoadingSkeleton, Image, InfoRow } from '@/components'
+import useCombobox from '@/hooks/useCombobox'
 import { ButtonSize, ButtonVariant } from '@/components/Button/variants';
 import { TypographyVariant, TypographyColor } from '@/components/Typography/variants';
 import { InputSize } from '@/components/Input/variants';
@@ -91,37 +92,43 @@ function SearchInputDemo() {
 const menuItems = ["Australia", "Austria", "Azerbaijan", "Argentina", "Armenia"];
 
 function MenuDemo() {
-  const [open, setOpen] = useState(true);
   const [query, setQuery] = useState('');
-  const [activeIndex, setActiveIndex] = useState(0);
   const [selected, setSelected] = useState('');
 
   const filtered = menuItems.filter((item) =>
     item.toLowerCase().includes(query.toLowerCase())
   );
 
+  const combobox = useCombobox({
+    count: filtered.length,
+    onSelect: (index) => {
+      setSelected(filtered[index]);
+      setQuery(filtered[index]);
+    },
+  });
+
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-xs font-medium text-muted uppercase tracking-wide">Interactive</p>
+      <p className="text-xs font-medium text-muted uppercase tracking-wide">Interactive (useCombobox)</p>
       <div className="relative">
         <SearchInput
           inputSize="md"
           value={query}
-          onChange={(e) => { setQuery(e.target.value); setOpen(true); setActiveIndex(0); }}
-          onClear={() => { setQuery(''); setSelected(''); setOpen(true); }}
-          placeholder="Search countries..."
+          onChange={(e) => { setQuery(e.target.value); combobox.handleOpen(); }}
+          onClear={() => { setQuery(''); setSelected(''); combobox.handleOpen(); }}
+          placeholder="Search countries... (try arrow keys)"
+          {...combobox.getInputProps()}
         />
-        <MenuList open={open} onClose={() => setOpen(false)}>
+        <MenuList open={combobox.isOpen} onClose={combobox.handleClose} {...combobox.getMenuProps()}>
           {filtered.length === 0 ? (
             <MenuEmpty message={`No countries match "${query}"`} />
           ) : (
             filtered.map((item, i) => (
               <MenuItem
                 key={item}
-                active={i === activeIndex}
+                active={i === combobox.activeIndex}
                 selected={item === selected}
-                onMouseEnter={() => setActiveIndex(i)}
-                onClick={() => { setSelected(item); setQuery(item); setOpen(false); }}
+                {...combobox.getItemProps(i)}
               >
                 {item}
               </MenuItem>
