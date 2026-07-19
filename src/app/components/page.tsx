@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-import { Banner, Container, Button, Typography, Input, SearchInput, MenuList, MenuItem, MenuEmpty } from '@/components'
+import { Banner, Container, Button, Typography, Input, SearchInput, MenuList, MenuItem, MenuEmpty, LoadingSkeleton, Image, InfoRow } from '@/components'
 import { ButtonSize, ButtonVariant } from '@/components/Button/variants';
 import { TypographyVariant, TypographyColor } from '@/components/Typography/variants';
 import { InputSize } from '@/components/Input/variants';
@@ -168,6 +168,60 @@ export default function ComponentsPage() {
         <Container>
           <h3 className="font-medium zinc-600">Menu</h3>
           <MenuDemo />
+        </Container>
+        <Container>
+          <h3 className="font-medium zinc-600">LoadingSkeleton</h3>
+          <div className="flex flex-col gap-3">
+            <p className="text-xs font-medium text-muted uppercase tracking-wide">Shapes</p>
+            <div className="flex gap-3 items-center">
+              <LoadingSkeleton width="2.5rem" height="2.5rem" rounded="full" />
+              <div className="flex flex-col gap-1.5 flex-1">
+                <LoadingSkeleton width="60%" height="0.75rem" />
+                <LoadingSkeleton width="40%" height="0.75rem" />
+              </div>
+            </div>
+            <p className="text-xs font-medium text-muted uppercase tracking-wide">Card skeleton</p>
+            <div className="flex gap-3">
+              <LoadingSkeleton width="6.75rem" height="4.5rem" rounded="sm" />
+              <div className="flex flex-col gap-1.5 flex-1 py-1">
+                <LoadingSkeleton width="70%" height="0.75rem" />
+                <LoadingSkeleton width="50%" height="0.75rem" />
+                <LoadingSkeleton width="40%" height="0.75rem" />
+              </div>
+            </div>
+          </div>
+        </Container>
+        <Container>
+          <h3 className="font-medium zinc-600">Image</h3>
+          <div className="flex flex-col gap-3">
+            <p className="text-xs font-medium text-muted uppercase tracking-wide">Aspect ratios</p>
+            <div className="flex gap-3 items-start">
+              <div className="flex flex-col gap-1 items-center">
+                <Image src="https://flagcdn.com/w320/ph.png" alt="Philippines" aspect="3/2" width={112} height={75} className="rounded-sm" />
+                <span className="text-xs text-muted">3:2</span>
+              </div>
+              <div className="flex flex-col gap-1 items-center">
+                <Image src="https://flagcdn.com/w320/jp.png" alt="Japan" aspect="4/3" width={112} height={84} className="rounded-sm" />
+                <span className="text-xs text-muted">4:3</span>
+              </div>
+              <div className="flex flex-col gap-1 items-center">
+                <Image src="https://flagcdn.com/w320/au.png" alt="Australia" aspect="16/9" width={112} height={63} className="rounded-sm" />
+                <span className="text-xs text-muted">16:9</span>
+              </div>
+              <div className="flex flex-col gap-1 items-center">
+                <Image src="https://flagcdn.com/w320/ch.png" alt="Switzerland" aspect="1/1" width={80} height={80} className="rounded-sm" />
+                <span className="text-xs text-muted">1:1</span>
+              </div>
+            </div>
+          </div>
+        </Container>
+        <Container>
+          <h3 className="font-medium zinc-600">InfoRow</h3>
+          <div className="flex flex-col gap-2">
+            <InfoRow label="Official Name" value="Republic of the Philippines" />
+            <InfoRow label="Currency" value="Philippine peso (₱)" />
+            <InfoRow label="Drives on" value="Right" />
+          </div>
         </Container>
     </div>
   )
