@@ -1,5 +1,7 @@
 'use client'
 
+import Typography from "../Typography";
+
 interface BannerProps {
   title: string
   description: string
@@ -8,8 +10,8 @@ interface BannerProps {
 export default function Banner({ title, description }: BannerProps) {
   return (
     <div>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <Typography variant="h5">{title}</Typography>
+        <Typography variant="body2" color="muted" >{description}</Typography>
     </div>
   )
 }
