@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-import { Banner, Container, Button, Typography, Input, SearchInput } from '@/components'
+import { Banner, Container, Button, Typography, Input, SearchInput, MenuList, MenuItem, MenuEmpty } from '@/components'
 import { ButtonSize, ButtonVariant } from '@/components/Button/variants';
 import { TypographyVariant, TypographyColor } from '@/components/Typography/variants';
 import { InputSize } from '@/components/Input/variants';
@@ -88,6 +88,70 @@ function SearchInputDemo() {
   );
 }
 
+const menuItems = ["Australia", "Austria", "Azerbaijan", "Argentina", "Armenia"];
+
+function MenuDemo() {
+  const [open, setOpen] = useState(true);
+  const [query, setQuery] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selected, setSelected] = useState('');
+
+  const filtered = menuItems.filter((item) =>
+    item.toLowerCase().includes(query.toLowerCase())
+  );
+
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="text-xs font-medium text-muted uppercase tracking-wide">Interactive</p>
+      <div className="relative">
+        <SearchInput
+          inputSize="md"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); setActiveIndex(0); }}
+          onClear={() => { setQuery(''); setSelected(''); setOpen(true); }}
+          placeholder="Search countries..."
+        />
+        <MenuList open={open} onClose={() => setOpen(false)}>
+          {filtered.length === 0 ? (
+            <MenuEmpty message={`No countries match "${query}"`} />
+          ) : (
+            filtered.map((item, i) => (
+              <MenuItem
+                key={item}
+                active={i === activeIndex}
+                selected={item === selected}
+                onMouseEnter={() => setActiveIndex(i)}
+                onClick={() => { setSelected(item); setQuery(item); setOpen(false); }}
+              >
+                {item}
+              </MenuItem>
+            ))
+          )}
+        </MenuList>
+      </div>
+      {selected && <p className="text-sm text-muted">Selected: <span className="text-foreground font-medium">{selected}</span></p>}
+
+      <p className="text-xs font-medium text-muted uppercase tracking-wide">States</p>
+      <div className="flex gap-4">
+        <div className="relative flex-1">
+          <p className="text-xs text-muted mb-1">With items</p>
+          <MenuList open={true} className="relative mt-0">
+            <MenuItem>Default item</MenuItem>
+            <MenuItem active>Active item</MenuItem>
+            <MenuItem selected>Selected item</MenuItem>
+          </MenuList>
+        </div>
+        <div className="relative flex-1">
+          <p className="text-xs text-muted mb-1">Empty state</p>
+          <MenuList open={true} className="relative mt-0">
+            <MenuEmpty />
+          </MenuList>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ComponentsPage() {
   return (
     <div className="flex flex-col gap-4 p-8" >
@@ -100,6 +164,10 @@ export default function ComponentsPage() {
         <Container>
           <h3 className="font-medium zinc-600">SearchInput</h3>
           <SearchInputDemo />
+        </Container>
+        <Container>
+          <h3 className="font-medium zinc-600">Menu</h3>
+          <MenuDemo />
         </Container>
     </div>
   )

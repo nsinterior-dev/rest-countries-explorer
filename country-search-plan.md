@@ -222,6 +222,8 @@ Each pattern below is real in this project and maps to a concrete file — not a
 
 11. **Repository + Dependency Inversion (the scaling seam)** → `CountryRepository` interface with `clientCountryRepository` (used) and `serverCountryRepository` (scaling path). `useCountrySearch` depends on the interface, not a concrete impl. *This is the marquee answer to "design for millions of records": swapping client-side → server-side search is a one-line implementation swap; Presentation, hooks, and Domain don't change. Strategy pattern at the data boundary. Also makes the whole app trivially testable with a fake repository.*
 
+12. **Click-outside-to-close (event lifecycle management)** → `MenuList` (`components/Menu/MenuList.tsx`). *The menu registers a `mousedown` listener on `document` only while open — guarded by a `useEffect` that checks `open` and `onClose` before attaching. `mousedown` is used instead of `click` because `click` fires after `mouseup`, which can race with focus changes (e.g. clicking the input would close then immediately reopen the menu). The handler checks `parentElement.contains(target)` — not just the `<ul>` — so clicking the input or clear button inside the same wrapper doesn't trigger a close. The cleanup function removes the listener when the menu closes or the component unmounts, preventing memory leaks and stale references. This is a textbook `useEffect` cleanup pattern: tie the listener's lifetime to the component's open state.*
+
 Memoization note: pair `useMemo` (derived list) with `useCallback` (stable handlers passed to `Option` rows) so the suggestion list doesn't re-render every keystroke.
 
 ---
