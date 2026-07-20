@@ -32,8 +32,8 @@ export default function CountryOptions({
 }: CountryOptionsProps) {
   const hasCountries = countries.length > 0;
 
-  const renderLoading = isLoading && "loding...";
-  const renderError = !isLoading && error && "error";
+  const renderLoading = isLoading && <MenuItem>Loading countries...</MenuItem>
+  const renderError = !isLoading && error && <MenuItem>No countries are found</MenuItem>
   const renderOptions =
     !isLoading &&
     !error &&
@@ -47,7 +47,7 @@ export default function CountryOptions({
         {country.name}
       </MenuItem>
     ));
-  const renderEmpty = !isLoading && !error && !hasCountries && "Wala na";
+  const renderEmpty = !isLoading && !error && !hasCountries && <MenuItem>No countries are found</MenuItem>
 
   function handleScrollOptions(e: React.UIEvent<HTMLUListElement>) {
     const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
