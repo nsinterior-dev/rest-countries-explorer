@@ -32,6 +32,25 @@ export default function CountryCard({ country, isLoading }: CountryCardProps) {
   if (isLoading) return <CountryCardSkeleton />
   if (!country) return <CountryCardEmpty />
 
+  const countryDetails = [
+    {
+        label: "OfficialName",
+        value: country.officialName,
+    },
+    {
+        label: "Currency",
+        value: formatCurrency(country.currencies)
+    },
+    {
+        label: "DrivesOn",
+        value: formatDriveDirection(country.drivesOn)
+    },
+  ]
+
+  const renderCountryDetails = countryDetails.map((detail) => ( 
+    <InfoRow key={detail.value} label={detail.label} value={detail.value} />
+  ))
+
   return (
     <div className="flex flex-col sm:flex-row gap-2 sm:items-start">
       <Image
@@ -42,9 +61,7 @@ export default function CountryCard({ country, isLoading }: CountryCardProps) {
         className="rounded-sm sm:max-w-40 shrink-0"
       />
       <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 min-w-0 items-baseline content-start">
-        <InfoRow label="Official Name" value={country.officialName} />
-        <InfoRow label="Currency" value={formatCurrency(country.currencies)} />
-        <InfoRow label="Drives on" value={formatDriveDirection(country.drivesOn)} />
+        {renderCountryDetails}
       </div>
     </div>
   )
