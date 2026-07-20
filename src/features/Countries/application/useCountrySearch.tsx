@@ -5,6 +5,7 @@ import useListCountries from './useListCountries';
 
 export default function useCountrySearch() {
     const [query, setQuery] = useState('')
+    const [searchTriggered, setSearchTriggered] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
 
     const debouncedQuery = useDebounce(query, 300)
@@ -15,11 +16,21 @@ export default function useCountrySearch() {
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage,
-    } = useListCountries({q: debouncedQuery})
+    } = useListCountries({ q: debouncedQuery, enabled: searchTriggered })
+
+    function triggerSearch(value: string) {
+        setQuery(value)
+        if (!searchTriggered) setSearchTriggered(true)
+    }
+
+    function activateSearch() {
+        if (!searchTriggered) setSearchTriggered(true)
+    }
 
     return {
         query,
-        setQuery,
+        setQuery: triggerSearch,
+        activateSearch,
         countries: countries?.pages.flatMap((page) => page.countries) ?? [],
         isLoading,
         error,

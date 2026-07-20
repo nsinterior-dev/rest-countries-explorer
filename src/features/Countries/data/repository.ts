@@ -1,4 +1,3 @@
-import { Country } from "../domain";
 import { listCountries } from "./api";
 import { toCountry } from "./mapper";
 import { SearchCountriesParams } from "./params";

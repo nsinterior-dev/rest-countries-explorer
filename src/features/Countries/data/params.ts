@@ -1,5 +1,5 @@
 export type SearchCountriesParams = {
-  q: string;
+  q?: string;
   limit?: number;
   offset?: number;
 };

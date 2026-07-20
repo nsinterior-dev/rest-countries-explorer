@@ -11,6 +11,7 @@ export default function Countries() {
     countries,
     query,
     setQuery,
+    activateSearch,
     setSelectedCountry,
     selectedCountry,
     isLoading,
@@ -55,6 +56,7 @@ export default function Countries() {
                 value={query}
                 onChange={handleSearchChange}
                 onClear={handleClearChange}
+                onFocus={() => { activateSearch(); handleOpen(); }}
                 {...getInputProps()}
             />
             <CountryOptions

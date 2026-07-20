@@ -2,13 +2,13 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { SearchCountriesParams } from '../data/params';
 import { searchCountries } from '../data/repository';
 
-export default function useListCountries(params: SearchCountriesParams) {
+export default function useListCountries(params: SearchCountriesParams & { enabled?: boolean }) {
   const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['countries', params],
     queryFn: ({ pageParam = 0}) => searchCountries({
         q: params.q,
         limit: 50,
-        offset: pageParam
+        offset: pageParam,
     }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
@@ -17,7 +17,7 @@ export default function useListCountries(params: SearchCountriesParams) {
         }
         return undefined;
     },
-    enabled: params.q.length > 0
+    enabled: params.enabled ?? true,
   })
 
   return {
