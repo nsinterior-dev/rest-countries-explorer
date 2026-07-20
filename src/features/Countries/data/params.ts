@@ -3,12 +3,3 @@ export type SearchCountriesParams = {
   limit?: number;
   offset?: number;
 };
-
-export type ListCountriesParams = {
-  limit?: number;
-  offset?: number;
-};
-
-export type GetCountryParams = {
-  code: string;
-};

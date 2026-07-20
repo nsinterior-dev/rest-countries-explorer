@@ -1,4 +1,4 @@
-import { Image, InfoRow, LoadingSkeleton, Typography } from '@/components'
+import { Image, InfoRow, LoadingSkeleton } from '@/components'
 import { Country } from '../domain/types'
 import { formatCurrency, formatDriveDirection } from '../domain/format'
 
@@ -34,7 +34,7 @@ export default function CountryCard({ country, isLoading }: CountryCardProps) {
 
   const countryDetails = [
     {
-        label: "OfficialName",
+        label: "Official Name",
         value: country.officialName,
     },
     {
@@ -42,7 +42,7 @@ export default function CountryCard({ country, isLoading }: CountryCardProps) {
         value: formatCurrency(country.currencies)
     },
     {
-        label: "DrivesOn",
+        label: "Drives On",
         value: formatDriveDirection(country.drivesOn)
     },
   ]
