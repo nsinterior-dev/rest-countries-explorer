@@ -1,15 +1,15 @@
 import axios from "axios";
 import { SearchCountriesParams } from "./params";
 
-const apiPath = 'https://api.restcountries.com/countries/v5'
-const auth = `Bearer ${process.env.NEXT_PUBLIC_REST_API_KEY}`
+const API_PATH = 'https://api.restcountries.com/countries/v5'
+const AUTH = `Bearer ${process.env.NEXT_PUBLIC_REST_API_KEY}`
 
 export async function listCountries(params: SearchCountriesParams) {
    const { q, ...rest } = params;
-   const { data } = await axios(apiPath, {
+   const { data } = await axios(API_PATH, {
         params: q ? { q, ...rest } : rest,
         headers: {
-            Authorization: auth
+            Authorization: AUTH
         }
     })
     return data;
