@@ -2,9 +2,9 @@
 import React from "react";
 import { Banner, Container, SearchInput } from "@/components";
 import CountryOptions from "./CountryOptions";
+import CountryCard from "./CountryCard";
 import useCountrySearch from "../application/useCountrySearch";
 import useCombobox from "@/hooks/useCombobox";
-import { event } from "next/dist/build/output/log";
 
 export default function Countries() {
   const {
@@ -48,7 +48,7 @@ export default function Countries() {
   return (
     <Container>
       <div className="flex flex-col gap-4">
-        <Banner title="Countries Explorer" description="Basta" />
+        <Banner title="Explore a country" description="Search and select a country to see details" />
         <div className="relative">
             <SearchInput
                 placeholder="Search Country"
@@ -70,7 +70,7 @@ export default function Countries() {
                 menuProps={getItemProps}
             />
         </div>
-        {/* <InfoRow /> */}
+        <CountryCard country={selectedCountry} />
       </div>
     </Container>
   );
