@@ -40,6 +40,11 @@ npm run dev
 
 
 
+## Preview
+
+![Search](./public/screenshots/search.png)
+![Country Details](./public/screenshots/sample.png)
+
 ## Tech Stack
 
 - **Next.js 16** (App Router, TypeScript)

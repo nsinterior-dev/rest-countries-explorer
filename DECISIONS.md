@@ -136,3 +136,33 @@ I originally had `getCountry`, `ListCountriesParams`, and `GetCountryParams` too
 **What I did:** Removed everything I wasn't using — `getCountry()`, unused types, empty barrel files.
 
 **Why:** Dead code is noise. If I need it later, I'll write it — it takes 2 minutes. The git history has it if I ever need to reference it.
+
+---
+
+## D14: Show initial country list on first interaction
+
+**What I did:** The API works without a `?q=` param — it returns all countries paginated. So when the user clicks the search input and starts interacting, I fetch the initial list immediately. No need to type before seeing results.
+
+**Why:** Better UX — the user sees options right away instead of staring at an empty dropdown. The fetch only triggers on first interaction (not on page load) so I don't waste an API call if the user never touches the search. Once fetched, React Query caches it — clearing the search input and reopening shows the cached list instantly, no refetch.
+
+**Trade-off:** One extra API call for the initial list. But it's cached and makes the app feel responsive.
+
+---
+
+## D15: Flag emoji in menu items instead of flag images
+
+**What I did:** Each country option in the dropdown shows the flag emoji from the API (`flag.emoji`) next to the country name, instead of loading flag images.
+
+**Why:** Loading 50 flag images in a dropdown would be 50 network requests every time the list renders. The emoji is already in the API response — zero extra cost, renders instantly, looks native on every OS. Same visual purpose, no performance hit.
+
+**Trade-off:** Emoji rendering varies slightly across OS/browsers. But for a dropdown item it's fine — the real flag image shows in the detail card.
+
+---
+
+## D16: Strip empty `q` param from API calls
+
+**What I did:** The API returns a `searchQueryEmpty` error if you send `?q=` with an empty string. In `api.ts` I strip the `q` param when it's empty so the request becomes `/countries/v5?limit=50&offset=0` — which returns all countries.
+
+**Why:** Without this, focusing the search input (which triggers a fetch with empty query) would error out. The fix lives in one place (`api.ts`) so the hooks and repository don't need to care about this edge case.
+
+**Trade-off:** None — it's a one-line fix for an API quirk.
