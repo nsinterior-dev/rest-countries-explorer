@@ -33,8 +33,10 @@ export default function CountryOptions({
   const hasCountries = countries.length > 0;
 
   const renderLoading = isLoading && <MenuItem>Loading countries...</MenuItem>
-  const renderError = !isLoading && error && <MenuItem>No countries are found</MenuItem>
-  const renderEmpty = !isLoading && !error && !hasCountries && <MenuItem>No countries are found</MenuItem>
+
+  const emptyComp = <MenuItem>No countries are found</MenuItem>
+  const renderError = !isLoading && error && emptyComp;
+  const renderEmpty = !isLoading && !error && !hasCountries && emptyComp;
   const renderOptions =
     !isLoading &&
     !error &&
