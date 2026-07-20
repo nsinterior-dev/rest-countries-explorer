@@ -10,17 +10,23 @@ export default function useCountrySearch() {
     const debouncedQuery = useDebounce(query, 300)
     const {
         data: countries,
-        isLoading, 
-        error
+        isLoading,
+        error,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
     } = useListCountries({q: debouncedQuery})
 
     return {
         query,
         setQuery,
-        countries: countries ?? [],
+        countries: countries?.pages.flatMap((page) => page.countries) ?? [],
         isLoading,
         error,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
         selectedCountry,
-        setSelectedCountry
+        setSelectedCountry,
     }
 }

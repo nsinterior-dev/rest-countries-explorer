@@ -1,18 +1,22 @@
 import { Country } from "../domain";
 import { listCountries } from "./api";
 import { toCountry } from "./mapper";
+import { SearchCountriesParams } from "./params";
 
 
-export async function searchCountries(query: string):Promise<Country[]>{
+export async function searchCountries(params: SearchCountriesParams){
     try{
-        const response = await listCountries({
-            q: query,
-            limit: 10
-        })
-        return response.data.objects.map(toCountry)
+        const response = await listCountries(params)
+        return {
+            countries: response.data.objects.map(toCountry),
+            meta: response.data.meta
+        }
     }
     catch(e){
         console.error(e)
-        return []
+        return {
+            countries: [],
+            meta: {}
+        }
     }
 }

@@ -15,6 +15,9 @@ export default function Countries() {
     selectedCountry,
     isLoading,
     error,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage
   } = useCountrySearch();
   const {
     isOpen,
@@ -48,20 +51,23 @@ export default function Countries() {
         <Banner title="Countries Explorer" description="Basta" />
         <div className="relative">
             <SearchInput
-            placeholder="Search Country"
-            value={query}
-            onChange={handleSearchChange}
-            onClear={handleClearChange}
-            {...getInputProps()}
+                placeholder="Search Country"
+                value={query}
+                onChange={handleSearchChange}
+                onClear={handleClearChange}
+                {...getInputProps()}
             />
             <CountryOptions
-            open={isOpen}
-            onClose={handleClose}
-            countries={countries}
-            isLoading={isLoading}
-            error={error}
-            activeIndex={activeIndex}
-            menuProps={getItemProps}
+                open={isOpen}
+                onClose={handleClose}
+                countries={countries}
+                isLoading={isLoading}
+                error={error}
+                isFetchingNextPage={isFetchingNextPage}
+                hasNextPage={hasNextPage}
+                fetchNextPage={fetchNextPage}
+                activeIndex={activeIndex}
+                menuProps={getItemProps}
             />
         </div>
         {/* <InfoRow /> */}
