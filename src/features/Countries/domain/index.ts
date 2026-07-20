@@ -1,5 +1,3 @@
-import * as types from './types'
-import * as filter from './filter'
-import * as format from './format'
-
-export { types, filter, format }
+export { type Country, type Currency, type DrivingSide, type Flag } from './types'
+export { filterCountries } from './filter'
+export { formatCurrency, formatDriveDirection } from './format'

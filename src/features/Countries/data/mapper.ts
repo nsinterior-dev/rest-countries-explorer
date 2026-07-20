@@ -1,4 +1,4 @@
-import { Country, DrivingSide } from "../domain/types";
+import { Country, DrivingSide } from "../domain";
 import { CountryDto } from "./dto";
 
 export function toCountry(dto: CountryDto): Country {

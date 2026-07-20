@@ -1,4 +1,4 @@
-import { Country } from "../domain/types";
+import { Country } from "../domain";
 import { listCountries } from "./api";
 import { toCountry } from "./mapper";
 
