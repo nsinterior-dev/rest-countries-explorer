@@ -1,6 +1,6 @@
 # Country Explorer
 
-A single-page React app that searches the REST Countries API and displays country details (Official Name, Currencies, Drives On)
+A single-page React app that searches the REST Countries API and displays country details (Official Name, Currencies, Flag, Drives On)
 
 ## Prerequisites
 
@@ -12,17 +12,17 @@ A single-page React app that searches the REST Countries API and displays countr
 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/rest-countries-explorer.git
+git clone https://github.com/nsinterior-dev/rest-countries-explorer.git
 cd rest-countries-explorer
 ```
 
-1. Install dependencies
+2. Install dependencies
 
 ```bash
 npm install
 ```
 
-1. Create a `.env` file in the root with your REST Countries API key
+3. Create a `.env` file in the root with your REST Countries API key
 
 ```
 NEXT_PUBLIC_REST_API_KEY=your_api_key_here
@@ -30,13 +30,13 @@ NEXT_PUBLIC_REST_API_KEY=your_api_key_here
 
 You can get a free API key at [https://restcountries.com/sign-up](https://restcountries.com/sign-up)
 
-1. Run the dev server
+4. Run the dev server
 
 ```bash
 npm run dev
 ```
 
-1. Open [http://localhost:3000](http://localhost:3000)
+5. Open [http://localhost:3000](http://localhost:3000)
 
 
 

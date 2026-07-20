@@ -58,7 +58,7 @@ Technical decisions I made during this project, why I made them, and what I trad
 
 **What I did:** Used the API's `?q=` search endpoint with debounce and pagination instead of fetching all 250 countries and filtering client-side.
 
-**Why:** At work I deal with millions of records — we never fetch everything client-side. We paginate, debounce, and cancel stale requests. Client-side filtering works for 250 items, but it doesn't show what I know. I've been doing server-side search for 4 years in production and I want to demonstrate that.
+**Why:** In production with large datasets, client-side filtering doesn't scale. Server-side search with debounce, pagination, and proper error handling is the pattern I've used for years. Client-side filtering works for 250 items, but it doesn't show what I know. I want to demonstrate real-world data fetching patterns.
 
 **Trade-off:** More API calls than fetch-once, but it shows real-world patterns.
 
@@ -66,7 +66,7 @@ Technical decisions I made during this project, why I made them, and what I trad
 
 ## D7: Data layer separation (DTO, params, mapper, api, repository)
 
-**What I did:** Four files in the data layer:
+**What I did:** Five files in the data layer:
 - `dto.ts` — the raw API response shape, no domain imports
 - `params.ts` — typed request params
 - `mapper.ts` — translates API shape → domain shape
@@ -115,7 +115,7 @@ I originally had `getCountry`, `ListCountriesParams`, and `GetCountryParams` too
 
 **What I did:** React Query's `useInfiniteQuery` with scroll detection to auto-load the next page when the user scrolls near the bottom.
 
-**Why:** This is how I handle pagination with react query — infinite scroll with offset-based loading. It's smoother than a "Load more" button. React Query handles page caching and deduplication out of the box. The API's `meta.more` flag tells me when to stop.
+**Why:** This is how I handle pagination with React Query — infinite scroll with offset-based loading. It's smoother than a "Load more" button. React Query handles page caching and deduplication out of the box. The API's `meta.more` flag tells me when to stop.
 
 **Trade-off:** More complex than loading everything at once, but it's the production pattern.
 
