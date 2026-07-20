@@ -38,7 +38,7 @@ export default function CountryCard({ country, isLoading }: CountryCardProps) {
         value: country.officialName,
     },
     {
-        label: "Currency",
+        label: "Currencies",
         value: formatCurrency(country.currencies)
     },
     {

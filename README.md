@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Country Explorer
 
-## Getting Started
+A single-page React app that searches the REST Countries API and displays country details (Official Name, Currencies, Drives On)
 
-First, run the development server:
+## Prerequisites
+
+- Node.js >= 20.9.0
+- npm
+
+## Setup
+
+1. Clone the repo
+
+```bash
+git clone https://github.com/your-username/rest-countries-explorer.git
+cd rest-countries-explorer
+```
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+1. Create a `.env` file in the root with your REST Countries API key
+
+```
+NEXT_PUBLIC_REST_API_KEY=your_api_key_here
+```
+
+You can get a free API key at [https://restcountries.com/sign-up](https://restcountries.com/sign-up)
+
+1. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js 16** (App Router, TypeScript)
+- **Tailwind CSS** for styling
+- **React Query** (`@tanstack/react-query`) for data fetching, caching, and infinite scroll
+- **Axios** for HTTP requests
+- **REST Countries API v5**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/                    # Next.js pages and layout
+├── components/             # Reusable base components (Button, Input, Typography, etc.)
+├── hooks/                  # Generic hooks (useDebounce, useCombobox)
+└── features/
+    └── Countries/
+        ├── domain/         # Types, filter, format — pure, no React
+        ├── data/           # DTO, params, mapper, API client, repository
+        ├── application/    # React Query hooks (useListCountries, useCountrySearch)
+        └── presentation/   # UI components (Countries, CountryCard, CountryOptions)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Documentation
+
+See [DECISIONS.md](./DECISIONS.md) for technical decisions and trade-offs.
