@@ -6,7 +6,8 @@ interface Currency {
 
 interface Flag {
     url: string,
-    description: string
+    description: string,
+    emoji: string
 }
 
 type DrivingSide = 'left' | 'right'

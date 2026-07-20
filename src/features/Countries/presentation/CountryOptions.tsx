@@ -47,7 +47,10 @@ export default function CountryOptions({
         active={index === activeIndex}
         {...menuProps(index)}
       >
-        {country.name}
+        <span className="inline-flex items-center gap-2">
+          <span>{country.flag.emoji}</span>
+          {country.name}
+        </span>
       </MenuItem>
     ));
   

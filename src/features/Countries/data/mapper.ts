@@ -10,6 +10,7 @@ export function toCountry(dto: CountryDto): Country {
     flag: {
       url: flag.url_svg,
       description: flag.description,
+      emoji: flag.emoji,
     },
     currencies: currencies.map(({ code, name, symbol }) => ({ code, name, symbol })),
     drivesOn: cars.driving_side as DrivingSide,

@@ -51,7 +51,7 @@ export default function Countries() {
         <Banner title="Explore a country" description="Search and select a country to see details" />
         <div className="relative">
             <SearchInput
-                placeholder="Search Country"
+                placeholder="Search country"
                 value={query}
                 onChange={handleSearchChange}
                 onClear={handleClearChange}

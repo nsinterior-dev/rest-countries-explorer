@@ -11,6 +11,7 @@ export interface CountryDto {
   flag: {
     url_svg: string;
     description: string;
+    emoji: string;
   };
   cars: {
     driving_side: string;
