@@ -114,3 +114,27 @@ Technical decisions I made during this project, with context and reasoning.
 **Why:** Debounce waits 300ms after the user stops typing before firing the search. So typing "philippines" sends one request, not eleven. At work we always debounce search inputs that hit the API — it's standard practice. I tried 150ms first but it was too fast — still fired too many requests on normal typing speed. 300ms feels right, users don't notice the delay.
 
 **Trade-off:** Slight delay before results show up. Worth it to not burn through API limits.
+
+---
+
+## D10: Application layer — split hooks by responsibility
+
+**Context:** I need a hook that handles search query state, debounce, API calls, and selected country. Could put everything in one hook.
+
+**Decision:** Split into two hooks: `useListCountries` (React Query wrapper for the API call) and `useCountrySearch` (orchestrator that combines query state, debounce, API results, and selection).
+
+**Why:** `useListCountries` is a pure data-fetching hook — give it params, get back data/loading/error. It doesn't know about debounce or selection. `useCountrySearch` is the orchestrator that wires debounce → fetch → selection together. If I need to fetch countries somewhere else without the search UX, I just use `useListCountries` directly. Same pattern I use at work — one hook per concern, one orchestrator to combine them.
+
+**Trade-off:** Two files instead of one, but each is simple and testable on its own.
+
+---
+
+## D11: Infinite scroll with useInfiniteQuery for pagination
+
+**Context:** The API returns paginated results (limit/offset). First page shows 10 results. The user might want to see more without typing a more specific query.
+
+**Decision:** Use React Query's `useInfiniteQuery` with scroll detection on the MenuList to auto-load the next page when the user scrolls near the bottom.
+
+**Why:** This is how I handle pagination at work — infinite scroll with cursor/offset-based loading. It's smoother than a "Load more" button and demonstrates real-world data fetching. React Query's `useInfiniteQuery` handles page caching, deduplication, and loading states per page out of the box. The API's `meta.more` flag tells me when to stop fetching.
+
+**Trade-off:** More complex than loading all results at once, but demonstrates production pagination patterns.
